@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2E8B57"/>
+    <meta name="description" content="Complete Islamic App - Prayer Times, Quran, Hadith, Zakat Calculator, Inheritance Calculator, and more Islamic tools.">
+    <meta name="keywords" content="Islamic app, prayer times, Quran, Hadith, Zakat calculator, Islamic inheritance, halal food finder, Islamic calendar">
+    <meta name="author" content="DeepVidia.com">
+    <meta property="og:title" content="Complete Islamic App - Your Daily Islamic Companion">
+    <meta property="og:description" content="Prayer times, Quran, Hadith, calculators, and Islamic tools all in one app">
+    <meta property="og:type" content="website">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2E8B57',
+                        'primary-light': '#3CB371',
+                        secondary: '#F4F9F6',
+                        accent: '#FFD700',
+                        'text-primary': '#2C3E50',
+                        'text-secondary': '#7F8C8D',
+                        'border-color': '#E8F5E8',
+                        error: '#E74C3C',
+                        success: '#27AE60'
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Complete Islamic App - Your Daily Islamic Companion</title>
+</head>
+<body class="bg-gradient-to-br from-blue-400 to-purple-600 min-h-screen p-4">
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-primary to-primary-light text-white p-6">
+            <nav class="flex flex-wrap justify-between items-center mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all font-medium">🏠 Home</a>
+                    <a href="prayer.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🕌 Prayer Times</a>
+                    <a href="quran.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📖 Quran</a>
+                    <a href="hadith.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📚 Hadith</a>
+                    <a href="dua.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤲 Dua & Azkar</a>
+                    <a href="zakat.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">💰 Zakat Calculator</a>
+                    <a href="inheritance.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📋 Inheritance</a>
+                    <a href="calendar.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📅 Islamic Calendar</a>
+                    <a href="food.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🍽️ Halal Food</a>
+                    <a href="charity.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤝 Charity Hub</a>
+                </div>
+                <div class="relative">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)" class="bg-white/10 border border-white/20 text-white px-3 py-2 rounded-lg text-sm cursor-pointer">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ar">🇸🇦 العربية</option>
+                        <option value="ur">🇵🇰 اردو</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="zh">🇨🇳 中文</option>
+                        <option value="hi">🇮🇳 हिन्दी</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    </select>
+                </div>
+            </nav>
+            <h1 class="text-4xl font-bold mb-2 text-center">🕌 Complete Islamic App</h1>
+            <p class="text-center text-lg opacity-90">Your Daily Islamic Companion</p>
+        </div>
+        
+        <div class="p-8">
+            <!-- Quick Actions Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Prayer Times Card -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border-l-4 border-blue-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">🕌</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Prayer Times</h3>
+                    <p class="text-gray-600 mb-4">Get accurate prayer times with Qibla direction</p>
+                    <a href="prayer.html" class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Quran Card -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border-l-4 border-green-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">📖</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Quran with Tafsir</h3>
+                    <p class="text-gray-600 mb-4">Read Quran with translations and audio recitation</p>
+                    <a href="quran.html" class="inline-block bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Hadith Card -->
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border-l-4 border-purple-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Hadith Library</h3>
+                    <p class="text-gray-600 mb-4">Search authentic Hadith collections</p>
+                    <a href="hadith.html" class="inline-block bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Dua & Azkar Card -->
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-xl border-l-4 border-yellow-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">🤲</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Dua & Azkar</h3>
+                    <p class="text-gray-600 mb-4">Morning and evening adhkar with reminders</p>
+                    <a href="dua.html" class="inline-block bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Zakat Calculator Card -->
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl border-l-4 border-emerald-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Zakat Calculator</h3>
+                    <p class="text-gray-600 mb-4">Calculate your Zakat with live rates</p>
+                    <a href="zakat.html" class="inline-block bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Inheritance Calculator Card -->
+                <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl border-l-4 border-red-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">📋</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Inheritance Calculator</h3>
+                    <p class="text-gray-600 mb-4">Islamic inheritance distribution calculator</p>
+                    <a href="inheritance.html" class="inline-block bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Islamic Calendar Card -->
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-xl border-l-4 border-indigo-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">📅</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Islamic Calendar</h3>
+                    <p class="text-gray-600 mb-4">Hijri calendar with important dates</p>
+                    <a href="calendar.html" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Halal Food Finder Card -->
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl border-l-4 border-orange-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">🍽️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Halal Food Finder</h3>
+                    <p class="text-gray-600 mb-4">Scan barcodes for halal status</p>
+                    <a href="food.html" class="inline-block bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Charity Hub Card -->
+                <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl border-l-4 border-teal-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Charity Hub</h3>
+                    <p class="text-gray-600 mb-4">Donate to trusted Islamic charities</p>
+                    <a href="charity.html" class="inline-block bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Marriage Matchmaker Card -->
+                <div class="bg-gradient-to-br from-rose-50 to-rose-100 p-6 rounded-xl border-l-4 border-rose-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">💍</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Marriage Matchmaker</h3>
+                    <p class="text-gray-600 mb-4">Find matches aligned with Islamic values</p>
+                    <a href="marriage.html" class="inline-block bg-rose-500 text-white px-4 py-2 rounded-lg hover:bg-rose-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Pregnancy Calculator Card -->
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-xl border-l-4 border-pink-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">🤰</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Pregnancy Calculator</h3>
+                    <p class="text-gray-600 mb-4">Due date, gestational age, milestones</p>
+                    <a href="pregnancy.html" class="inline-block bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Mosque Finder Card -->
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-xl border-l-4 border-emerald-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">🕋</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Mosque Finder</h3>
+                    <p class="text-gray-600 mb-4">Find masajid near you</p>
+                    <a href="mosque.html" class="inline-block bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors">Open</a>
+                </div>
+
+                <!-- Boycott List Card -->
+                <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl border-l-4 border-gray-500 hover:shadow-lg transition-all">
+                    <div class="text-4xl mb-4">🚫</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Boycott List</h3>
+                    <p class="text-gray-600 mb-4">Brands to avoid with halal alternatives</p>
+                    <a href="boycott.html" class="inline-block bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">Open</a>
+                </div>
+            </div>
+
+            <!-- Islamic Guidance Section -->
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-center text-primary mb-8">📖 Allah's Orders About Inheritance</h2>
+                
+                <!-- Quranic Verses -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">🕌 Quranic Verses on Inheritance</h3>
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border-l-4 border-primary shadow-md hover:shadow-lg transition-all">
+                            <div class="mb-4">
+                                <span class="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Surah An-Nisa (4:11)</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-primary mb-3">Allah commands you concerning your children:</p>
+                                <p class="font-amiri text-2xl text-right mb-4 p-4 bg-primary/10 rounded-lg border-r-4 border-primary">يُوصِيكُمُ اللَّهُ فِي أَوْلَادِكُمْ ۖ لِلذَّكَرِ مِثْلُ حَظِّ الْأُنثَيَيْنِ</p>
+                                <p class="text-gray-700">"Allah commands you concerning your children: for the male, what is equal to the share of two females."</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border-l-4 border-primary shadow-md hover:shadow-lg transition-all">
+                            <div class="mb-4">
+                                <span class="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold">Surah An-Nisa (4:12)</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-primary mb-3">Allah commands you concerning spouses and parents:</p>
+                                <p class="font-amiri text-2xl text-right mb-4 p-4 bg-primary/10 rounded-lg border-r-4 border-primary">وَلَكُمْ نِصْفُ مَا تَرَكَ أَزْوَاجُكُمْ إِن لَّمْ يَكُن لَّهُنَّ وَلَدٌ</p>
+                                <p class="text-gray-700">"And for you is half of what your wives leave if they have no child."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hadith Section -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">📚 Hadith on Inheritance</h3>
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 rounded-xl border-l-4 border-yellow-500 shadow-md hover:shadow-lg transition-all">
+                            <div class="mb-4">
+                                <span class="bg-yellow-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Narrated by Abu Huraira (RA)</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-yellow-800 mb-3">The Prophet ﷺ said:</p>
+                                <p class="text-gray-700 mb-3">"Learn the laws of inheritance and teach them, for they are half of knowledge."</p>
+                                <p class="text-gray-500 italic text-sm">- Sahih Muslim</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Islamic Principles -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">⚖️ Key Islamic Inheritance Principles</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 text-center hover:shadow-lg transition-all">
+                            <div class="text-5xl mb-4">📋</div>
+                            <h4 class="text-lg font-bold text-primary mb-3">Fixed Shares</h4>
+                            <p class="text-gray-600 text-sm">Allah has prescribed specific shares for each family member in the Quran. These shares are fixed and cannot be altered.</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 text-center hover:shadow-lg transition-all">
+                            <div class="text-5xl mb-4">⚖️</div>
+                            <h4 class="text-lg font-bold text-primary mb-3">Justice & Fairness</h4>
+                            <p class="text-gray-600 text-sm">Islamic inheritance ensures fair distribution according to Allah's wisdom, considering family relationships and responsibilities.</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 text-center hover:shadow-lg transition-all">
+                            <div class="text-5xl mb-4">🔄</div>
+                            <h4 class="text-lg font-bold text-primary mb-3">Priority System</h4>
+                            <p class="text-gray-600 text-sm">There's a specific order of priority: spouse, parents, children, then extended family members.</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl border border-gray-200 text-center hover:shadow-lg transition-all">
+                            <div class="text-5xl mb-4">📊</div>
+                            <h4 class="text-lg font-bold text-primary mb-3">Mathematical Precision</h4>
+                            <p class="text-gray-600 text-sm">Each share is calculated precisely to ensure the total distribution equals 100% of the estate.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions Section -->
+            <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border-l-4 border-accent mb-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">📝 How to Use This App</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</span>
+                        <p class="text-gray-700 font-medium">Choose any feature from the cards above to get started</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</span>
+                        <p class="text-gray-700 font-medium">Each tool is designed to be easy to use and Islamic-compliant</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</span>
+                        <p class="text-gray-700 font-medium">Get accurate results and guidance for your Islamic needs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Features</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">Prayer Times & Qibla</li>
+                        <li class="text-gray-300">Quran with Tafsir</li>
+                        <li class="text-gray-300">Hadith Library</li>
+                        <li class="text-gray-300">Zakat Calculator</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Contact Info</h4>
+                    <p class="text-gray-300 mb-2">📧 info@deepvidia.com</p>
+                    <p class="text-gray-300">🌐 www.deepvidia.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400">
+                <p>&copy; 2024 Complete Islamic App. Built with ❤️ by <a href="https://deepvidia.com" target="_blank" class="text-accent font-bold hover:underline">DeepVidia.com</a></p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- PWA Install Prompt -->
+    <div id="installPrompt" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-white rounded-xl shadow-2xl p-6 max-w-md w-11/12 z-50 hidden border border-gray-200">
+        <div>
+            <h3 class="text-lg font-bold text-primary mb-2">📱 Install App</h3>
+            <p class="text-gray-600 mb-4">Install Complete Islamic App for quick access and offline use.</p>
+            <div class="flex gap-3">
+                <button id="installBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-light transition-colors">Install</button>
+                <button id="dismissBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">Not Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/app.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>

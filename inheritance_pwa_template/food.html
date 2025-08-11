@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2E8B57"/>
+    <meta name="description" content="Halal Food Finder - Find halal restaurants and food options near you using Google Maps.">
+    <meta name="keywords" content="halal food, halal restaurants, halal finder, Google Maps, Islamic food">
+    <meta name="author" content="DeepVidia.com">
+    <meta property="og:title" content="Halal Food Finder">
+    <meta property="og:description" content="Find halal restaurants and food options near you">
+    <meta property="og:type" content="website">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2E8B57',
+                        'primary-light': '#3CB371',
+                        secondary: '#F4F9F6',
+                        accent: '#FFD700',
+                        'text-primary': '#2C3E50',
+                        'text-secondary': '#7F8C8D',
+                        'border-color': '#E8F5E8',
+                        error: '#E74C3C',
+                        success: '#27AE60'
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Halal Food Finder - Find Halal Restaurants Near You</title>
+</head>
+<body class="bg-gradient-to-br from-orange-400 to-red-600 min-h-screen p-4">
+    <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-primary to-primary-light text-white p-6">
+            <nav class="flex flex-wrap justify-between items-center mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🏠 Home</a>
+                    <a href="prayer.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🕌 Prayer Times</a>
+                    <a href="quran.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📖 Quran</a>
+                    <a href="hadith.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📚 Hadith</a>
+                    <a href="dua.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤲 Dua & Azkar</a>
+                    <a href="zakat.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">💰 Zakat Calculator</a>
+                    <a href="inheritance.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📋 Inheritance</a>
+                    <a href="calendar.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📅 Islamic Calendar</a>
+                    <a href="food.html" class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all font-medium">🍽️ Halal Food</a>
+                    <a href="charity.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤝 Charity Hub</a>
+                </div>
+                <div class="relative">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)" class="bg-white/10 border border-white/20 text-white px-3 py-2 rounded-lg text-sm cursor-pointer">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ar">🇸🇦 العربية</option>
+                        <option value="ur">🇵🇰 اردو</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="zh">🇨🇳 中文</option>
+                        <option value="hi">🇮🇳 हिन्दी</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    </select>
+                </div>
+            </nav>
+            <h1 class="text-4xl font-bold mb-2 text-center">🍽️ Halal Food Finder</h1>
+            <p class="text-center text-lg opacity-90">Find halal restaurants and food options near you</p>
+        </div>
+
+        <div class="p-8">
+            <!-- Search Controls -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label for="locationInput" class="block font-semibold text-gray-700 mb-2">📍 Location</label>
+                        <input type="text" id="locationInput" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter city, address, or use current location">
+                    </div>
+                    <div>
+                        <label for="searchRadius" class="block font-semibold text-gray-700 mb-2">🔍 Search Radius</label>
+                        <select id="searchRadius" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+                            <option value="1000">1 km</option>
+                            <option value="2000" selected>2 km</option>
+                            <option value="5000">5 km</option>
+                            <option value="10000">10 km</option>
+                            <option value="20000">20 km</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="foodType" class="block font-semibold text-gray-700 mb-2">🍕 Food Type</label>
+                        <select id="foodType" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+                            <option value="">All Types</option>
+                            <option value="restaurant">Restaurants</option>
+                            <option value="cafe">Cafes</option>
+                            <option value="bakery">Bakeries</option>
+                            <option value="grocery">Grocery Stores</option>
+                            <option value="fast_food">Fast Food</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button id="searchBtn" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-light transition-colors font-medium">
+                        🔍 Search Halal Food
+                    </button>
+                    <button id="useLocationBtn" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                        📍 Use My Location
+                    </button>
+                    <button id="clearBtn" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors font-medium">
+                        🗑️ Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Map and Results Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Map -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">🗺️ Map</h3>
+                        <div id="map" class="w-full h-96 rounded-lg border border-gray-200 bg-gray-100 flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <div class="text-4xl mb-2">🗺️</div>
+                                <p>Map will load here</p>
+                                <p class="text-sm">Enter a location or use your current location</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p>💡 Tip: Click on markers to see restaurant details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results List -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">🍽️ Results</h3>
+                        <div id="resultsList" class="space-y-4 max-h-96 overflow-y-auto">
+                            <div class="text-center text-gray-500 py-8">
+                                <div class="text-4xl mb-2">🍽️</div>
+                                <p>No results yet</p>
+                                <p class="text-sm">Search for halal food to see results</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters and Options -->
+            <div class="mt-6 bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">⚙️ Filters & Options</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="halalCertified" class="w-5 h-5 accent-primary" checked>
+                        <label for="halalCertified" class="font-medium text-gray-700">Halal Certified</label>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="vegetarian" class="w-5 h-5 accent-primary">
+                        <label for="vegetarian" class="font-medium text-gray-700">Vegetarian Options</label>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="delivery" class="w-5 h-5 accent-primary">
+                        <label for="delivery" class="font-medium text-gray-700">Delivery Available</label>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="takeaway" class="w-5 h-5 accent-primary">
+                        <label for="takeaway" class="font-medium text-gray-700">Takeaway</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Halal Guidelines -->
+            <div class="mt-6 bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl border-l-4 border-green-500">
+                <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">📋 Halal Food Guidelines</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold text-green-700 mb-2">✅ What is Halal:</h4>
+                        <ul class="text-green-600 text-sm space-y-1">
+                            <li>• Meat from animals slaughtered according to Islamic law</li>
+                            <li>• Fish and seafood (all types)</li>
+                            <li>• Fruits, vegetables, and grains</li>
+                            <li>• Dairy products from halal animals</li>
+                            <li>• Eggs from halal birds</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-red-700 mb-2">❌ What is Haram:</h4>
+                        <ul class="text-red-600 text-sm space-y-1">
+                            <li>• Pork and pork products</li>
+                            <li>• Alcohol and intoxicants</li>
+                            <li>• Meat not slaughtered properly</li>
+                            <li>• Carnivorous animals</li>
+                            <li>• Blood and blood products</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Offline Status -->
+            <div id="offlineStatus" class="hidden bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-6">
+                <div class="flex items-center gap-3">
+                    <div class="text-yellow-600 text-xl">⚠️</div>
+                    <div>
+                        <h4 class="font-semibold text-yellow-800">Offline Mode</h4>
+                        <p class="text-sm text-yellow-700">Map features require internet connection. Some cached results may be available.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Features</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">Google Maps Integration</li>
+                        <li class="text-gray-300">Location Search</li>
+                        <li class="text-gray-300">Halal Certification</li>
+                        <li class="text-gray-300">Restaurant Reviews</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Contact Info</h4>
+                    <p class="text-gray-300 mb-2">📧 info@deepvidia.com</p>
+                    <p class="text-gray-300">🌐 www.deepvidia.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400">
+                <p>&copy; 2024 Halal Food Finder. Built with ❤️ by <a href="https://deepvidia.com" target="_blank" class="text-accent font-bold hover:underline">DeepVidia.com</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PWA Install Prompt -->
+    <div id="installPrompt" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-white rounded-xl shadow-2xl p-6 max-w-md w-11/12 z-50 hidden border border-gray-200">
+        <div>
+            <h3 class="text-lg font-bold text-primary mb-2">📱 Install App</h3>
+            <p class="text-gray-600 mb-4">Install Halal Food Finder for quick access and offline use.</p>
+            <div class="flex gap-3">
+                <button id="installBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-light transition-colors">Install</button>
+                <button id="dismissBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">Not Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/food.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html> 

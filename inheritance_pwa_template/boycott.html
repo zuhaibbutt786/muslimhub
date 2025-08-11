@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2E8B57"/>
+    <meta name="description" content="Boycott List - View brands to avoid and halal alternatives.">
+    <meta name="keywords" content="boycott, halal alternatives, ethical shopping, Muslim consumer guide">
+    <meta name="author" content="DeepVidia.com">
+    <meta property="og:title" content="Boycott List – With Halal Alternatives">
+    <meta property="og:description" content="Find halal alternatives to boycotted brands">
+    <meta property="og:type" content="website">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2E8B57',
+                        'primary-light': '#3CB371',
+                        secondary: '#F4F9F6',
+                        accent: '#FFD700',
+                        'text-primary': '#2C3E50',
+                        'text-secondary': '#7F8C8D',
+                        'border-color': '#E8F5E8',
+                        error: '#E74C3C',
+                        success: '#27AE60'
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Boycott List – Halal Alternatives</title>
+</head>
+<body class="bg-gradient-to-br from-gray-200 to-gray-300 min-h-screen p-4">
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-primary to-primary-light text-white p-6">
+            <nav class="flex flex-wrap justify-between items-center mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🏠 Home</a>
+                    <a href="food.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🍽️ Halal Food</a>
+                    <a href="mosque.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🕋 Mosques</a>
+                    <a href="marriage.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">💍 Marriage</a>
+                    <a href="pregnancy.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤰 Pregnancy</a>
+                    <a href="boycott.html" class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all font-medium">🚫 Boycott</a>
+                </div>
+                <div class="relative">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)" class="bg-white/10 border border-white/20 text-white px-3 py-2 rounded-lg text-sm cursor-pointer">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ar">🇸🇦 العربية</option>
+                        <option value="ur">🇵🇰 اردو</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="zh">🇨🇳 中文</option>
+                        <option value="hi">🇮🇳 हिन्दी</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    </select>
+                </div>
+            </nav>
+            <h1 class="text-4xl font-bold mb-2 text-center">🚫 Boycott List</h1>
+            <p class="text-center text-lg opacity-90">Ethical choices with halal alternatives</p>
+        </div>
+
+        <div class="p-8">
+            <!-- Search & Filters -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-2">🔎 Search Brand</label>
+                        <input id="searchInput" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg" placeholder="Type brand name...">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-2">📦 Category</label>
+                        <select id="categorySelect" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg">
+                            <option value="all">All</option>
+                            <option value="food">Food & Beverage</option>
+                            <option value="cosmetics">Cosmetics</option>
+                            <option value="tech">Tech</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="household">Household</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-2">✅ Show Alternatives Only</label>
+                        <select id="altFilter" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg">
+                            <option value="all">All</option>
+                            <option value="has_alternative">With Alternatives</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button id="applyFilters" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-light transition">Apply</button>
+                    <button id="clearFilters" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition">Clear</button>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-bold text-primary mb-4">📋 Brands</h3>
+                <div id="resultsList" class="space-y-4">
+                    <div class="text-center text-gray-500 py-8">
+                        <div class="text-4xl mb-2">🚫</div>
+                        <p>No results yet</p>
+                        <p class="text-sm">Use filters to find brands and alternatives</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200 text-yellow-800 text-sm">
+                ⚠️ Sources vary by country and time. Treat this as a community guide; verify locally when needed.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Features</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">Search & filter brands</li>
+                        <li class="text-gray-300">Halal alternatives</li>
+                        <li class="text-gray-300">Offline support</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Contact Info</h4>
+                    <p class="text-gray-300 mb-2">📧 info@deepvidia.com</p>
+                    <p class="text-gray-300">🌐 www.deepvidia.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400">
+                <p>&copy; 2024 Boycott List. Built with ❤️ by <a href="https://deepvidia.com" target="_blank" class="text-accent font-bold hover:underline">DeepVidia.com</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PWA Install Prompt -->
+    <div id="installPrompt" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-white rounded-xl shadow-2xl p-6 max-w-md w-11/12 z-50 hidden border border-gray-200">
+        <div>
+            <h3 class="text-lg font-bold text-primary mb-2">📱 Install App</h3>
+            <p class="text-gray-600 mb-4">Install Boycott List for quick access.</p>
+            <div class="flex gap-3">
+                <button id="installBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-light transition-colors">Install</button>
+                <button id="dismissBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">Not Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/boycott.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html> 

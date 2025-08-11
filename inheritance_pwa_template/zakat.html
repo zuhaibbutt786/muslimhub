@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2E8B57"/>
+    <meta name="description" content="Zakat Calculator - Calculate your Zakat with live gold/silver rates and automatic nisab calculations.">
+    <meta name="keywords" content="Zakat calculator, Islamic charity, nisab, gold silver rates, Islamic finance">
+    <meta name="author" content="DeepVidia.com">
+    <meta property="og:title" content="Zakat Calculator">
+    <meta property="og:description" content="Calculate your Zakat with live gold/silver rates and automatic nisab calculations">
+    <meta property="og:type" content="website">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2E8B57',
+                        'primary-light': '#3CB371',
+                        secondary: '#F4F9F6',
+                        accent: '#FFD700',
+                        'text-primary': '#2C3E50',
+                        'text-secondary': '#7F8C8D',
+                        'border-color': '#E8F5E8',
+                        error: '#E74C3C',
+                        success: '#27AE60'
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Zakat Calculator - Calculate Your Islamic Charity</title>
+</head>
+<body class="bg-gradient-to-br from-green-400 to-blue-600 min-h-screen p-4">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-primary to-primary-light text-white p-6">
+            <nav class="flex flex-wrap justify-between items-center mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🏠 Home</a>
+                    <a href="prayer.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🕌 Prayer Times</a>
+                    <a href="quran.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📖 Quran</a>
+                    <a href="hadith.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📚 Hadith</a>
+                    <a href="dua.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤲 Dua & Azkar</a>
+                    <a href="zakat.html" class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all font-medium">💰 Zakat Calculator</a>
+                    <a href="inheritance.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📋 Inheritance</a>
+                    <a href="calendar.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📅 Islamic Calendar</a>
+                    <a href="food.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🍽️ Halal Food</a>
+                    <a href="charity.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤝 Charity Hub</a>
+                </div>
+                <div class="relative">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)" class="bg-white/10 border border-white/20 text-white px-3 py-2 rounded-lg text-sm cursor-pointer">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ar">🇸🇦 العربية</option>
+                        <option value="ur">🇵🇰 اردو</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="zh">🇨🇳 中文</option>
+                        <option value="hi">🇮🇳 हिन्दी</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    </select>
+                </div>
+            </nav>
+            <h1 class="text-4xl font-bold mb-2 text-center">💰 Zakat Calculator</h1>
+            <p class="text-center text-lg opacity-90">Calculate your Zakat with live rates and automatic nisab</p>
+        </div>
+        
+        <div class="p-8">
+            <!-- Live Rates Section -->
+            <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 rounded-xl border-l-4 border-yellow-500 mb-6">
+                <h3 class="text-xl font-bold text-yellow-800 mb-4 flex items-center gap-2">📊 Live Rates & Nisab</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg text-center">
+                        <div class="text-2xl mb-2">🥇</div>
+                        <div class="font-bold text-gray-800">Gold Rate</div>
+                        <div id="goldRate" class="text-lg font-semibold text-primary">Loading...</div>
+                        <div class="text-sm text-gray-600">per gram</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg text-center">
+                        <div class="text-2xl mb-2">🥈</div>
+                        <div class="font-bold text-gray-800">Silver Rate</div>
+                        <div id="silverRate" class="text-lg font-semibold text-primary">Loading...</div>
+                        <div class="text-sm text-gray-600">per gram</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg text-center">
+                        <div class="text-2xl mb-2">⚖️</div>
+                        <div class="font-bold text-gray-800">Nisab Value</div>
+                        <div id="nisabValue" class="text-lg font-semibold text-primary">Loading...</div>
+                        <div class="text-sm text-gray-600">minimum threshold</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zakat Calculation Form -->
+            <form id="zakat-form">
+                <!-- Cash & Bank Accounts -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">💵 Cash & Bank Accounts</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="cashAmount" class="block font-semibold text-gray-700 mb-2">Cash on Hand</label>
+                            <input type="number" id="cashAmount" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter cash amount">
+                        </div>
+                        <div>
+                            <label for="bankAccounts" class="block font-semibold text-gray-700 mb-2">Bank Accounts</label>
+                            <input type="number" id="bankAccounts" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter bank balance">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Precious Metals -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">🥇 Precious Metals</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="goldWeight" class="block font-semibold text-gray-700 mb-2">Gold Weight (grams)</label>
+                            <input type="number" id="goldWeight" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter gold weight">
+                            <small class="text-gray-500 text-sm">Include jewelry, coins, bars</small>
+                        </div>
+                        <div>
+                            <label for="silverWeight" class="block font-semibold text-gray-700 mb-2">Silver Weight (grams)</label>
+                            <input type="number" id="silverWeight" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter silver weight">
+                            <small class="text-gray-500 text-sm">Include jewelry, coins, bars</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Investments -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">📈 Investments</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="stocksValue" class="block font-semibold text-gray-700 mb-2">Stocks & Shares</label>
+                            <input type="number" id="stocksValue" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter current value">
+                        </div>
+                        <div>
+                            <label for="mutualFunds" class="block font-semibold text-gray-700 mb-2">Mutual Funds</label>
+                            <input type="number" id="mutualFunds" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter current value">
+                        </div>
+                        <div>
+                            <label for="cryptoValue" class="block font-semibold text-gray-700 mb-2">Cryptocurrency</label>
+                            <input type="number" id="cryptoValue" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter current value">
+                        </div>
+                        <div>
+                            <label for="otherInvestments" class="block font-semibold text-gray-700 mb-2">Other Investments</label>
+                            <input type="number" id="otherInvestments" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter current value">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Assets -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">🏢 Business Assets</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="businessInventory" class="block font-semibold text-gray-700 mb-2">Business Inventory</label>
+                            <input type="number" id="businessInventory" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter inventory value">
+                        </div>
+                        <div>
+                            <label for="businessCash" class="block font-semibold text-gray-700 mb-2">Business Cash</label>
+                            <input type="number" id="businessCash" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter business cash">
+                        </div>
+                        <div>
+                            <label for="businessReceivables" class="block font-semibold text-gray-700 mb-2">Accounts Receivable</label>
+                            <input type="number" id="businessReceivables" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter receivables">
+                        </div>
+                        <div>
+                            <label for="businessEquipment" class="block font-semibold text-gray-700 mb-2">Business Equipment</label>
+                            <input type="number" id="businessEquipment" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter equipment value">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Debts & Liabilities -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">💳 Debts & Liabilities</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="personalDebts" class="block font-semibold text-gray-700 mb-2">Personal Debts</label>
+                            <input type="number" id="personalDebts" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter personal debts">
+                        </div>
+                        <div>
+                            <label for="businessDebts" class="block font-semibold text-gray-700 mb-2">Business Debts</label>
+                            <input type="number" id="businessDebts" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter business debts">
+                        </div>
+                        <div>
+                            <label for="creditCards" class="block font-semibold text-gray-700 mb-2">Credit Card Balances</label>
+                            <input type="number" id="creditCards" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter credit card balances">
+                        </div>
+                        <div>
+                            <label for="otherLiabilities" class="block font-semibold text-gray-700 mb-2">Other Liabilities</label>
+                            <input type="number" id="otherLiabilities" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter other liabilities">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <button type="submit" class="w-full bg-gradient-to-r from-primary to-primary-light text-white py-4 px-6 rounded-lg font-bold text-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                    🧮 Calculate Zakat
+                </button>
+            </form>
+            
+            <!-- Results Section -->
+            <div id="zakat-result" class="hidden mt-8">
+                <div class="bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-xl border-l-4 border-green-500 mb-6">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">📊 Zakat Calculation Results</h3>
+                    <div id="result-content"></div>
+                </div>
+            </div>
+
+            <!-- Zakat Information -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">📚 Zakat Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-3">What is Zakat?</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Zakat is an annual charitable payment that is obligatory for Muslims who meet the nisab (minimum threshold). 
+                            It is calculated as 2.5% of your total wealth and is distributed to those in need.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-3">Nisab Threshold</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            The nisab is equivalent to the value of 87.48 grams of gold or 612.36 grams of silver. 
+                            You are only required to pay Zakat if your wealth exceeds this threshold for a full lunar year.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-3">What is Included?</h4>
+                        <ul class="text-gray-600 text-sm space-y-1">
+                            <li>• Cash and bank accounts</li>
+                            <li>• Gold and silver (jewelry, coins, bars)</li>
+                            <li>• Investments and stocks</li>
+                            <li>• Business inventory and assets</li>
+                            <li>• Accounts receivable</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-3">What is Excluded?</h4>
+                        <ul class="text-gray-600 text-sm space-y-1">
+                            <li>• Primary residence</li>
+                            <li>• Personal vehicles</li>
+                            <li>• Business equipment (if used)</li>
+                            <li>• Debts and liabilities</li>
+                            <li>• Wealth below nisab</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charity Organizations -->
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl border-l-4 border-blue-500 mb-6">
+                <h3 class="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2">🤝 Recommended Charities</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg text-center hover:shadow-lg transition-all">
+                        <div class="text-2xl mb-2">🏥</div>
+                        <h4 class="font-bold text-gray-800 mb-2">Islamic Relief</h4>
+                        <p class="text-sm text-gray-600 mb-3">Global humanitarian aid</p>
+                        <a href="https://islamic-relief.org" target="_blank" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-colors">Donate</a>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg text-center hover:shadow-lg transition-all">
+                        <div class="text-2xl mb-2">🏫</div>
+                        <h4 class="font-bold text-gray-800 mb-2">Muslim Aid</h4>
+                        <p class="text-sm text-gray-600 mb-3">Education and development</p>
+                        <a href="https://muslimaid.org" target="_blank" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-colors">Donate</a>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg text-center hover:shadow-lg transition-all">
+                        <div class="text-2xl mb-2">🍽️</div>
+                        <h4 class="font-bold text-gray-800 mb-2">Human Appeal</h4>
+                        <p class="text-sm text-gray-600 mb-3">Food and emergency relief</p>
+                        <a href="https://humanappeal.org" target="_blank" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-colors">Donate</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Offline Status -->
+            <div id="offlineStatus" class="hidden bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="text-yellow-600 text-xl">⚠️</div>
+                    <div>
+                        <h4 class="font-semibold text-yellow-800">Offline Mode</h4>
+                        <p class="text-sm text-yellow-700">Using cached rates. Please check your internet connection for live rates.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Features</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">Zakat Calculator</li>
+                        <li class="text-gray-300">Live Gold & Silver Rates</li>
+                        <li class="text-gray-300">Nisab Calculations</li>
+                        <li class="text-gray-300">Charity Recommendations</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Contact Info</h4>
+                    <p class="text-gray-300 mb-2">📧 info@deepvidia.com</p>
+                    <p class="text-gray-300">🌐 www.deepvidia.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400">
+                <p>&copy; 2024 Zakat Calculator. Built with ❤️ by <a href="https://deepvidia.com" target="_blank" class="text-accent font-bold hover:underline">DeepVidia.com</a></p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- PWA Install Prompt -->
+    <div id="installPrompt" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-white rounded-xl shadow-2xl p-6 max-w-md w-11/12 z-50 hidden border border-gray-200">
+        <div>
+            <h3 class="text-lg font-bold text-primary mb-2">📱 Install App</h3>
+            <p class="text-gray-600 mb-4">Install Zakat Calculator for quick access and offline use.</p>
+            <div class="flex gap-3">
+                <button id="installBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-light transition-colors">Install</button>
+                <button id="dismissBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">Not Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/zakat.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html> 

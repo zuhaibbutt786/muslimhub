@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2E8B57"/>
+    <meta name="description" content="Islamic Inheritance Calculator - Calculate inheritance distribution according to Islamic laws with live gold/silver rates.">
+    <meta name="keywords" content="Islamic inheritance, inheritance calculator, Islamic law, gold silver rates, Pakistan inheritance">
+    <meta name="author" content="DeepVidia.com">
+    <meta property="og:title" content="Islamic Inheritance Calculator">
+    <meta property="og:description" content="Calculate inheritance shares according to Islamic laws with live gold/silver rates">
+    <meta property="og:type" content="website">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2E8B57',
+                        'primary-light': '#3CB371',
+                        secondary: '#F4F9F6',
+                        accent: '#FFD700',
+                        'text-primary': '#2C3E50',
+                        'text-secondary': '#7F8C8D',
+                        'border-color': '#E8F5E8',
+                        error: '#E74C3C',
+                        success: '#27AE60'
+                    }
+                }
+            }
+        }
+    </script>
+    <title>Islamic Inheritance Calculator - Calculate Islamic Inheritance Distribution</title>
+</head>
+<body class="bg-gradient-to-br from-blue-400 to-purple-600 min-h-screen p-4">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-primary to-primary-light text-white p-6">
+            <nav class="flex flex-wrap justify-between items-center mb-6">
+                <div class="flex flex-wrap gap-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🏠 Home</a>
+                    <a href="prayer.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🕌 Prayer Times</a>
+                    <a href="quran.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📖 Quran</a>
+                    <a href="hadith.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📚 Hadith</a>
+                    <a href="dua.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤲 Dua & Azkar</a>
+                    <a href="zakat.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">💰 Zakat Calculator</a>
+                    <a href="inheritance.html" class="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all font-medium">📋 Inheritance</a>
+                    <a href="calendar.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">📅 Islamic Calendar</a>
+                    <a href="food.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🍽️ Halal Food</a>
+                    <a href="charity.html" class="px-4 py-2 rounded-lg hover:bg-white/10 transition-all">🤝 Charity Hub</a>
+                </div>
+                <div class="relative">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)" class="bg-white/10 border border-white/20 text-white px-3 py-2 rounded-lg text-sm cursor-pointer">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ar">🇸🇦 العربية</option>
+                        <option value="ur">🇵🇰 اردو</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="zh">🇨🇳 中文</option>
+                        <option value="hi">🇮🇳 हिन्दी</option>
+                        <option value="tr">🇹🇷 Türkçe</option>
+                        <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    </select>
+                </div>
+            </nav>
+            <h1 class="text-4xl font-bold mb-2 text-center">📋 Islamic Inheritance Calculator</h1>
+            <p class="text-center text-lg opacity-90">Easy-to-use calculator for Islamic inheritance distribution</p>
+        </div>
+        
+        <div class="p-8">
+            <!-- Instructions Section -->
+            <div class="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border-l-4 border-accent mb-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">📝 How to Use This Calculator</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">1</span>
+                        <p class="text-gray-700 font-medium">Enter the total value of the estate (property, money, etc.)</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">2</span>
+                        <p class="text-gray-700 font-medium">Add family members who are alive and eligible for inheritance</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">3</span>
+                        <p class="text-gray-700 font-medium">Click "Calculate Inheritance" to see the distribution</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="inheritance-form">
+                <!-- Estate Value Section -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">💰 Estate Value</h3>
+                    <div class="mb-4">
+                        <label for="totalEstate" class="block font-semibold text-gray-700 mb-2">Total Estate Value (PKR)</label>
+                        <input type="number" id="totalEstate" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" required placeholder="Enter total estate value">
+                        <small class="text-gray-500 text-sm mt-1 block">Include all property, money, and assets</small>
+                    </div>
+                </div>
+
+                <!-- Gold and Silver Section -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">🥇 Gold & Silver Assets</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label for="goldWeight" class="block font-semibold text-gray-700 mb-2">Gold Weight (in grams)</label>
+                            <input type="number" id="goldWeight" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter gold weight">
+                            <small class="text-gray-500 text-sm mt-1 block">Leave empty if no gold</small>
+                        </div>
+                        <div>
+                            <label for="silverWeight" class="block font-semibold text-gray-700 mb-2">Silver Weight (in grams)</label>
+                            <input type="number" id="silverWeight" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter silver weight">
+                            <small class="text-gray-500 text-sm mt-1 block">Leave empty if no silver</small>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 p-4 rounded-lg border border-yellow-200">
+                        <div class="flex justify-between items-center py-2 border-b border-yellow-200">
+                            <span class="font-medium">💛 Gold Rate:</span>
+                            <span id="goldRate" class="font-semibold text-primary">Loading...</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="font-medium">🤍 Silver Rate:</span>
+                            <span id="silverRate" class="font-semibold text-primary">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Family Members Section -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 mb-6 shadow-sm">
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-2">👨‍👩‍👧‍👦 Family Members</h3>
+                    
+                    <!-- Parents -->
+                    <div class="bg-secondary p-4 rounded-lg mb-6 border-l-4 border-primary-light">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">👴👵 Parents</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="father" class="w-5 h-5 accent-primary">
+                                <label for="father" class="font-medium text-gray-700">Father is alive</label>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="mother" class="w-5 h-5 accent-primary">
+                                <label for="mother" class="font-medium text-gray-700">Mother is alive</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spouse -->
+                    <div class="bg-secondary p-4 rounded-lg mb-6 border-l-4 border-primary-light">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">💑 Spouse</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="spouse" class="w-5 h-5 accent-primary">
+                                <label for="spouse" class="font-medium text-gray-700">Spouse is alive</label>
+                            </div>
+                            <div id="spouseTypeGroup" class="hidden">
+                                <label for="spouseType" class="block font-semibold text-gray-700 mb-2">Spouse Type</label>
+                                <select id="spouseType" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+                                    <option value="">Select Spouse Type</option>
+                                    <option value="husband">Husband</option>
+                                    <option value="wife">Wife</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Children -->
+                    <div class="bg-secondary p-4 rounded-lg mb-6 border-l-4 border-primary-light">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">👶 Children</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                            <div>
+                                <label for="sonsCount" class="block font-semibold text-gray-700 mb-2">Number of Sons</label>
+                                <input type="number" id="sonsCount" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" min="0" value="0" placeholder="Enter number of sons">
+                            </div>
+                            <div>
+                                <label for="daughtersCount" class="block font-semibold text-gray-700 mb-2">Number of Daughters</label>
+                                <input type="number" id="daughtersCount" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" min="0" value="0" placeholder="Enter number of daughters">
+                            </div>
+                        </div>
+                        
+                        <!-- Sons Details -->
+                        <div id="sonsDetails" class="hidden bg-white p-4 rounded-lg border border-gray-200">
+                            <h5 class="text-md font-bold text-gray-800 mb-3 flex items-center gap-2">👦 Sons Details</h5>
+                            <div id="sonsList" class="space-y-3"></div>
+                        </div>
+                        
+                        <!-- Daughters Details -->
+                        <div id="daughtersDetails" class="hidden bg-white p-4 rounded-lg border border-gray-200 mt-4">
+                            <h5 class="text-md font-bold text-gray-800 mb-3 flex items-center gap-2">👧 Daughters Details</h5>
+                            <div id="daughtersList" class="space-y-3"></div>
+                        </div>
+                    </div>
+
+                    <!-- Extended Family -->
+                    <div class="bg-secondary p-4 rounded-lg border-l-4 border-primary-light">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">👨‍👩‍👧‍👦 Extended Family</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="grandfather" class="w-5 h-5 accent-primary">
+                                <label for="grandfather" class="font-medium text-gray-700">Grandfather is alive</label>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="grandmother" class="w-5 h-5 accent-primary">
+                                <label for="grandmother" class="font-medium text-gray-700">Grandmother is alive</label>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="brothers" class="w-5 h-5 accent-primary">
+                                <label for="brothers" class="font-medium text-gray-700">Brothers are alive</label>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="sisters" class="w-5 h-5 accent-primary">
+                                <label for="sisters" class="font-medium text-gray-700">Sisters are alive</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <button type="submit" class="w-full bg-gradient-to-r from-primary to-primary-light text-white py-4 px-6 rounded-lg font-bold text-lg hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                    🧮 Calculate Inheritance Distribution
+                </button>
+            </form>
+            
+            <!-- Results Section -->
+            <div id="result" class="hidden mt-8 p-6 bg-secondary rounded-xl border-l-4 border-primary shadow-lg"></div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="privacy.html" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Features</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">Islamic Inheritance Calculator</li>
+                        <li class="text-gray-300">Live Gold & Silver Rates</li>
+                        <li class="text-gray-300">Multiple Languages</li>
+                        <li class="text-gray-300">Mobile Friendly</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-accent font-bold mb-4">Contact Info</h4>
+                    <p class="text-gray-300 mb-2">📧 info@deepvidia.com</p>
+                    <p class="text-gray-300">🌐 www.deepvidia.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-gray-400">
+                <p>&copy; 2024 Islamic Inheritance Calculator. Built with ❤️ by <a href="https://deepvidia.com" target="_blank" class="text-accent font-bold hover:underline">DeepVidia.com</a></p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- PWA Install Prompt -->
+    <div id="installPrompt" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-white rounded-xl shadow-2xl p-6 max-w-md w-11/12 z-50 hidden border border-gray-200">
+        <div>
+            <h3 class="text-lg font-bold text-primary mb-2">📱 Install App</h3>
+            <p class="text-gray-600 mb-4">Install Islamic Inheritance Calculator for quick access and offline use.</p>
+            <div class="flex gap-3">
+                <button id="installBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-light transition-colors">Install</button>
+                <button id="dismissBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">Not Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/app.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html> 
